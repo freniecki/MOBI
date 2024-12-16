@@ -43,20 +43,21 @@ public class ProductListActivity extends AppCompatActivity {
 
     private void fetchProducts() {
         db.collection("products")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    productList.clear();
-                    Log.d("ProductFetch", "Number of products fetched: " + queryDocumentSnapshots.size());
-                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                        Product product = document.toObject(Product.class);
-                        productList.add(product);
+                .addSnapshotListener((queryDocumentSnapshots, e) -> {
+                    if (e != null) {
+                        Toast.makeText(getApplicationContext(), "Błąd podczas pobierania produktów: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.e("FetchProductsError", "Error fetching products", e);
+                        return;
                     }
-                    productAdapter.notifyDataSetChanged();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getApplicationContext(), "Błąd podczas pobierania produktów: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.e("FetchProductsError", "Error fetching products", e);
+
+                    if (queryDocumentSnapshots != null) {
+                        productList.clear();
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            Product product = document.toObject(Product.class);
+                            productList.add(product);
+                        }
+                        productAdapter.notifyDataSetChanged();
+                    }
                 });
     }
-
 }
