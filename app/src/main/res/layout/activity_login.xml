@@ -44,7 +44,7 @@
         android:id="@+id/loginButton"
         android:layout_width="177dp"
         android:layout_height="68dp"
-        android:text="@string/register_button"
+        android:text="@string/login_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
