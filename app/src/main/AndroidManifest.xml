@@ -24,6 +24,12 @@
         <activity
             android:name=".ui.activities.RegisterActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.activities.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.ProductListActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -40,36 +40,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.52" />
 
-    <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/login_hint"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:textColorHint="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.246" />
-
-    <Spinner
-        android:id="@+id/spinnerRole"
-        android:layout_width="207dp"
-        android:layout_height="68dp"
-        android:background="@color/white"
-        android:backgroundTint="#C3AFAF"
-        android:entries="@array/spinner_role"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.672" />
-
     <Button
         android:id="@+id/loginButton"
         android:layout_width="177dp"
