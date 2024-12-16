@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">MOBI</string>
+
+    <string-array name="spinner_role">
+        <item>Parent</item>
+    </string-array>
+
+    <string name="register_button">Register</string>
+
+    <string name="login_hint">login</string>
+    <string name="email_hint">email</string>
+    <string name="password_hint">password</string>
 </resources>
