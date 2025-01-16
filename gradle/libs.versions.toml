@@ -14,6 +14,7 @@ material = "1.10.0"
 activity = "1.9.3"
 constraintlayout = "2.1.4"
 lombok = "1.18.30"
+materialVersion = "1.12.0"
 
 [libraries]
 compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
@@ -30,6 +31,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" }
+material-v1120 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -2,13 +2,25 @@
     <string name="app_name">MOBI</string>
 
     <string-array name="spinner_role">
-        <item>Parent</item>
+        <item>Rodzic</item>
+        <item>Dziecko</item>
     </string-array>
 
-    <string name="register_button">Register</string>
-    <string name="login_button">Login</string>
+    <string name="groszek">Groszek</string>
 
-    <string name="login_hint">login</string>
-    <string name="email_hint">email</string>
-    <string name="password_hint">password</string>
+    <string name="register_button">Zarejestruj się</string>
+    <string name="login_button">Zaloguj się</string>
+
+    <string name="login_hint">Nazwa użytkownika</string>
+    <string name="email_hint">Adres E-mail</string>
+    <string name="password_hint">Hasło</string>
+    <string name="logo_hint">logo sklepu groszek</string>
+    <string name="goto_login_hint">Przejdź do logowania</string>
+    <string name="goto_register_hint">Przejdź do rejestracji</string>
+    <string name="role_spinner_description">Wybierz rolę</string>
+    <string name="product_image">Zdjęcie produktu</string>
+    <string name="dodaj_do_koszyka">Dodaj do koszyka</string>
+    <string name="nazwa_produktu">Nazwa produktu</string>
+    <string name="cena_0_00_z">Cena: 0,00 zł</string>
+
 </resources>

@@ -60,7 +60,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             public void onFailure(@NonNull Exception e) {
                 // Handle failure (e.g., show a placeholder image or handle error)
                 Glide.with(holder.productImageView.getContext())
-                        .load(R.drawable.ic_launcher_background) // Assuming you have a placeholder image
+                        .load(R.drawable.no_image) // Assuming you have a placeholder image
                         .into(holder.productImageView);
             }
         });

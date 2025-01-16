@@ -1,34 +1,83 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:material="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activities.MainActivity">
 
-    <Button
-        android:id="@+id/goto_login"
-        android:layout_width="253dp"
-        android:layout_height="133dp"
-        android:text="Login"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/brown"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.326" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/logo_hint"
+            android:src="@drawable/pea" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/groszek"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/goto_login"
+        android:layout_width="320dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="172dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/green"
+        android:contentDescription="@string/goto_login_hint"
+        android:focusable="true"
+        android:paddingVertical="12dp"
+        android:text="@string/login_button"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        app:cornerRadius="16dp"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/goto_register"
-        android:layout_width="253dp"
-        android:layout_height="133dp"
-        android:text="Register"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="320dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/green"
+        android:contentDescription="@string/goto_register_hint"
+        android:focusable="true"
+        android:paddingVertical="12dp"
+        android:text="@string/register_button"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        app:cornerRadius="16dp"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.635" />
+        app:layout_constraintTop_toBottomOf="@+id/goto_login" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
