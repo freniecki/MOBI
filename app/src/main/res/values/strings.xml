@@ -22,5 +22,9 @@
     <string name="dodaj_do_koszyka">Dodaj do koszyka</string>
     <string name="nazwa_produktu">Nazwa produktu</string>
     <string name="cena_0_00_z">Cena: 0,00 zł</string>
+    <string name="register_title">Rejestracja</string>
+    <string name="products_title">Lista produktów</string>
+    <string name="login_title">Logowanie</string>
+    <string name="cart_title">Koszyk</string>
 
 </resources>

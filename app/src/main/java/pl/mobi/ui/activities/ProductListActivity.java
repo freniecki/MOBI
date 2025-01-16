@@ -3,11 +3,13 @@ package pl.mobi.ui.activities;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -21,6 +23,7 @@ import pl.mobi.ui.models.Product;
 public class ProductListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProductAdapter productAdapter;
+    private BottomNavigationView patentNav;
     private List<Product> productList;
 
     private FirebaseFirestore db;
@@ -35,6 +38,26 @@ public class ProductListActivity extends AppCompatActivity {
         productList = new ArrayList<>();
         productAdapter = new ProductAdapter(this, productList);
         recyclerView.setAdapter(productAdapter);
+        patentNav = findViewById(R.id.bottomNavigationView);
+
+        patentNav.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.nav_products) {
+                // Navigate to product list
+                return true;
+            } else if (itemId == R.id.nav_cart) {
+                startActivity(new Intent(ProductListActivity.this, CartActivity.class));
+                return true;
+            }
+             else if (itemId == R.id.nav_orders) {
+                // Navigate to orders
+                return true;
+            } else if (itemId == R.id.nav_account) {
+                // Navigate to account
+                return true;
+            }
+            return false;
+        });
 
         db = FirebaseFirestore.getInstance();
 
@@ -54,6 +77,7 @@ public class ProductListActivity extends AppCompatActivity {
                         productList.clear();
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                             Product product = document.toObject(Product.class);
+                            product.setId(document.getId());
                             productList.add(product);
                         }
                         productAdapter.notifyDataSetChanged();

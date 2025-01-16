@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +21,9 @@ import com.google.firebase.storage.StorageReference;
 import java.util.List;
 
 import pl.mobi.R;
+import pl.mobi.ui.models.CartItem;
 import pl.mobi.ui.models.Product;
+import pl.mobi.ui.utils.CartManager;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
     private Context context;
@@ -42,7 +45,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
         holder.productName.setText(product.getName());
-        holder.productPrice.setText("Cena: " + product.getPrice() + " zł");
+        holder.productPrice.setText("Cena: " + String.format("%.2f zł", product.getPrice()));
+
+        holder.addToCartButton.setOnClickListener(v -> {
+            CartManager.getInstance().addItem(new CartItem(
+                    product.getId(),
+                    product.getName(),
+                    product.getPrice(),
+                    1
+            ));
+        });
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference().child(product.getImg());
@@ -73,6 +85,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView productName, productPrice;
+        Button addToCartButton;
         ImageView productImageView;
 
         public ProductViewHolder(@NonNull View itemView) {
@@ -80,6 +93,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             productName = itemView.findViewById(R.id.productName);
             productPrice = itemView.findViewById(R.id.productPrice);
             productImageView = itemView.findViewById(R.id.productImg);
+            addToCartButton = itemView.findViewById(R.id.addToCartButton);
         }
     }
 }

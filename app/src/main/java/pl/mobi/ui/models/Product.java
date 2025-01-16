@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Product {
-//    private String id;
+    private String id;
     private String name;
     private double price;
     private String img;
