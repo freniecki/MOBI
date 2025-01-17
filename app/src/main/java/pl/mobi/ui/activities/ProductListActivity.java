@@ -23,7 +23,7 @@ import pl.mobi.ui.models.Product;
 public class ProductListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ProductAdapter productAdapter;
-    private BottomNavigationView patentNav;
+    private BottomNavigationView parentNav;
     private List<Product> productList;
 
     private FirebaseFirestore db;
@@ -38,9 +38,9 @@ public class ProductListActivity extends AppCompatActivity {
         productList = new ArrayList<>();
         productAdapter = new ProductAdapter(this, productList);
         recyclerView.setAdapter(productAdapter);
-        patentNav = findViewById(R.id.bottomNavigationView);
+        parentNav = findViewById(R.id.bottomNavigationView);
 
-        patentNav.setOnItemSelectedListener(item -> {
+        parentNav.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_products) {
                 // Navigate to product list
@@ -53,7 +53,7 @@ public class ProductListActivity extends AppCompatActivity {
                 // Navigate to orders
                 return true;
             } else if (itemId == R.id.nav_account) {
-                // Navigate to account
+                startActivity(new Intent(ProductListActivity.this, MyAccountActivity.class));
                 return true;
             }
             return false;

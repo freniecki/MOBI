@@ -83,6 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         Map<String, Object> userRole = new HashMap<>();
                         userRole.put("role", selectedRole);
+                        userRole.put("email", email);
 
                         db.collection("users").document(userId)
                                 .set(userRole, SetOptions.merge())

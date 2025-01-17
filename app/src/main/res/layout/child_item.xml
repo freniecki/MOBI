@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="8dp">
+
+    <!-- Account Icon for each child email -->
+    <ImageView
+        android:id="@+id/childAccountIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/account"
+        android:contentDescription="@string/account_icon_kid"
+        android:layout_marginEnd="8dp"/>
+
+    <!-- Child Email -->
+    <TextView
+        android:id="@+id/childEmailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="child@example.com"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <!-- Bin Icon Instead of Delete Button -->
+    <ImageView
+        android:id="@+id/childDeleteIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/bin"
+        android:contentDescription="@string/bin_icon_kid"
+        android:layout_marginStart="16dp"/>
+</LinearLayout>

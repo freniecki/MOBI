@@ -33,6 +33,9 @@
         <activity
             android:name=".ui.activities.CartActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.activities.MyAccountActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

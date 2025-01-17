@@ -26,5 +26,14 @@
     <string name="products_title">Lista produktów</string>
     <string name="login_title">Logowanie</string>
     <string name="cart_title">Koszyk</string>
+    <string name="my_account_title">Moje konto</string>
+    <string name="children">Moje dzieci</string>
+    <string name="logout">Wyloguj się</string>
+    <string name="add_child">Dodaj dziecko</string>
+    <string name="child_email">Podaj adres e-mail dziecka</string>
+    <string name="bin_icon_kid">Usuń dziecko</string>
+    <string name="account_icon_kid">Konto dziecka</string>
+    <string name="account_icon">Twoje konto</string>
+    <string name="plus">+</string>
 
 </resources>
