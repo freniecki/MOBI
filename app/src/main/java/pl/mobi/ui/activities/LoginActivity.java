@@ -63,13 +63,13 @@ public class LoginActivity extends AppCompatActivity {
                                             if (userRole.equals("Rodzic")) {
                                                 Intent paerntIntent = new Intent(LoginActivity.this, ProductListActivity.class);
                                                 startActivity(paerntIntent);
-                                            } /*else if (userRole.equals("Dziecko")) {
-                                                Intent childIntent = new Intent(LoginActivity.this, UserActivity.class);
+                                            } else if (userRole.equals("Dziecko")) {
+                                                Intent childIntent = new Intent(LoginActivity.this, MyOrdersActivity.class);
                                                 startActivity(childIntent);
                                             } else if (userRole.equals("Owner")) {
-                                                Intent ownerIntent = new Intent(LoginActivity.this, UserActivity.class);
+                                                Intent ownerIntent = new Intent(LoginActivity.this, PickUpActivity.class);
                                                 startActivity(ownerIntent);
-                                            }*/
+                                            }
                                         } else {
                                             Toast.makeText(LoginActivity.this, "Rola użytkownika nie została przypisana.", Toast.LENGTH_SHORT).show();
                                         }

@@ -6,9 +6,6 @@ public class CartItem {
     private double productPrice;
     private int quantity;
 
-    private String childId;
-    private String pickupDate;
-
     public CartItem() {}
 
     public CartItem(String productId, String productName, double productPrice, int quantity) {
@@ -48,21 +45,5 @@ public class CartItem {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public String getChildId() {
-        return childId;
-    }
-
-    public void setChildId(String childId) {
-        this.childId = childId;
-    }
-
-    public String getPickupDate() {
-        return pickupDate;
-    }
-
-    public void setPickupDate(String pickupDate) {
-        this.pickupDate = pickupDate;
     }
 }

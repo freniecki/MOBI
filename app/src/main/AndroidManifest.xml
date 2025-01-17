@@ -36,6 +36,18 @@
         <activity
             android:name=".ui.activities.MyAccountActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.activities.MyOrdersActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.ConfirmActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.PickUpActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.StatsActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

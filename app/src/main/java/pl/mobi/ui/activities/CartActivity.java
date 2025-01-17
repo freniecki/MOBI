@@ -1,16 +1,33 @@
 package pl.mobi.ui.activities;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import pl.mobi.R;
 import pl.mobi.ui.adapters.CartAdapter;
@@ -20,8 +37,13 @@ import pl.mobi.ui.utils.CartManager;
 public class CartActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CartAdapter cartAdapter;
-
     private BottomNavigationView parentNav;
+    private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
+    private List<String> childrenList = new ArrayList<>();
+    private Spinner childSpinner;
+    private TextView pickupDateTextView;
+    private Button dateButtom, confirmButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +53,25 @@ public class CartActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewCart);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        childSpinner = findViewById(R.id.childSpinner);
+
         List<CartItem> cartItems = CartManager.getInstance().getCartItems();
         cartAdapter = new CartAdapter(this, cartItems);
         recyclerView.setAdapter(cartAdapter);
 
         TextView totalPrice = findViewById(R.id.totalPrice);
         totalPrice.setText(String.format("Suma: %.2f zł", calculateTotal(cartItems)));
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        pickupDateTextView = findViewById(R.id.pickupDateTextView);
+
+        dateButtom = findViewById(R.id.pickupDateButton);
+        dateButtom.setOnClickListener(v -> showDatePicker());
+
+        confirmButton = findViewById(R.id.checkoutButton);
+        confirmButton.setOnClickListener(v -> confirmOrder());
 
         parentNav = findViewById(R.id.bottomNavigationView);
         parentNav.setSelectedItemId(R.id.nav_cart);
@@ -50,7 +85,7 @@ public class CartActivity extends AppCompatActivity {
                 return true;
             }
             else if (itemId == R.id.nav_orders) {
-                // Navigate to orders
+                startActivity(new Intent(CartActivity.this, MyOrdersActivity.class));
                 return true;
             } else if (itemId == R.id.nav_account) {
                 startActivity(new Intent(CartActivity.this, MyAccountActivity.class));
@@ -58,13 +93,92 @@ public class CartActivity extends AppCompatActivity {
             }
             return false;
         });
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        loadChildrenList(currentUser.getUid());
     }
 
-    private double calculateTotal(List<CartItem> cartItems) {
+    public static double calculateTotal(List<CartItem> cartItems) {
         double total = 0;
         for (CartItem item : cartItems) {
             total += item.getProductPrice() * item.getQuantity();
         }
         return total;
     }
+
+    private void loadChildrenList(String parentId) {
+        db.collection("users").document(parentId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        DocumentSnapshot parentDocument = task.getResult();
+                        List<String> childrenIds = (List<String>) parentDocument.get("children");
+
+                        if (childrenIds != null) {
+                            for (String childId : childrenIds) {
+                                db.collection("users").document(childId)
+                                        .get()
+                                        .addOnCompleteListener(childTask -> {
+                                            if (childTask.isSuccessful() && childTask.getResult() != null) {
+                                                DocumentSnapshot childDocument = childTask.getResult();
+                                                String childEmail = childDocument.getString("email");
+                                                if (childEmail != null) {
+//                                                    childrenList.add(childEmail);
+                                                    childrenList.add(childDocument.getId());
+                                                }
+
+                                            }
+                                            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, childrenList);
+                                            childSpinner.setAdapter(adapter);
+                                        });
+                            }
+                        }
+                    }
+                });
+    }
+
+    private void showDatePicker() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, selectedYear, selectedMonth, selectedDay) -> {
+            String date = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
+            pickupDateTextView.setText(date);
+        }, year, month, day);
+
+        datePickerDialog.show();
+    }
+
+    private void confirmOrder() {
+        String parentId = mAuth.getCurrentUser().getUid();
+        String childId = childSpinner.getSelectedItem().toString();
+        String pickupDate = pickupDateTextView.getText().toString();
+
+        if (pickupDate.isEmpty()) {
+            Toast.makeText(this, "Wybierz datę odbioru!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Map<String, Object> order = new HashMap<>();
+        order.put("childId", childId);
+        order.put("parentId", parentId);
+        order.put("pickupDate", pickupDate);
+        order.put("status", "Złożone");
+        order.put("items", CartManager.getInstance().getCartItems());
+
+        FirebaseFirestore.getInstance().collection("orders")
+                .add(order)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Zamówienie zostało złożone!", Toast.LENGTH_SHORT).show();
+                    CartManager.getInstance().clearCart();
+                    Intent intent = new Intent(CartActivity.this, MyOrdersActivity.class);
+                    startActivity(intent);
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Błąd przy składaniu zamówienia: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                });
+    }
+
 }

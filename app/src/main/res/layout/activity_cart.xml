@@ -49,6 +49,68 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/totalLayout" />
 
+
+    <LinearLayout
+        android:id="@+id/childSect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@id/dateSect"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/childText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Dziecko"
+            android:padding="8dp"
+            android:textSize="16sp"
+            android:layout_weight="1"/>
+
+        <Spinner
+            android:id="@+id/childSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dateSect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@id/totalLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/pickupDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Data odbioru"
+            android:padding="8dp"
+            android:textSize="16sp"
+            android:layout_weight="1"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pickupDateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wybierz datę"
+            android:textColor="@android:color/black"
+            android:backgroundTint="@color/green"
+            app:cornerRadius="16dp"
+            app:iconPadding="8dp" />
+
+    </LinearLayout>
+
     <!-- Total Price and Checkout Button -->
     <LinearLayout
         android:id="@+id/totalLayout"
@@ -76,7 +138,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Przejdź do kasy"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:backgroundTint="@color/green"
             app:cornerRadius="16dp"
             app:iconPadding="8dp" />

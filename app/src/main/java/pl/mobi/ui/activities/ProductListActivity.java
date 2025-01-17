@@ -39,18 +39,18 @@ public class ProductListActivity extends AppCompatActivity {
         productAdapter = new ProductAdapter(this, productList);
         recyclerView.setAdapter(productAdapter);
         parentNav = findViewById(R.id.bottomNavigationView);
+        parentNav.setSelectedItemId(R.id.nav_products);
 
         parentNav.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_products) {
-                // Navigate to product list
                 return true;
             } else if (itemId == R.id.nav_cart) {
                 startActivity(new Intent(ProductListActivity.this, CartActivity.class));
                 return true;
             }
              else if (itemId == R.id.nav_orders) {
-                // Navigate to orders
+                startActivity(new Intent(ProductListActivity.this, MyOrdersActivity.class));
                 return true;
             } else if (itemId == R.id.nav_account) {
                 startActivity(new Intent(ProductListActivity.this, MyAccountActivity.class));

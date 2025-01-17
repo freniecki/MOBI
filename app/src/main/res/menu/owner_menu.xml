@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_conf"
+        android:icon="@drawable/check"
+        android:title="Zatwierdzanie" />
+    <item
+        android:id="@+id/nav_check"
+        android:icon="@drawable/order"
+        android:title="Odbiór" />
+    <item
+        android:id="@+id/nav_orders"
+        android:icon="@drawable/list"
+        android:title="Zamówienia" />
+    <item
+        android:id="@+id/nav_stats"
+        android:icon="@drawable/stats"
+        android:title="Statystyki" />
+    <item
+        android:id="@+id/nav_account"
+        android:icon="@drawable/account"
+        android:title="Konto" />
+</menu>

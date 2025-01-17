@@ -27,7 +27,7 @@ import pl.mobi.R;
 public class MyAccountActivity extends AppCompatActivity {
 
     private TextView emailTextView, childrenTitleText;
-    private LinearLayout childrenListLayout;
+    private LinearLayout childrenListLayout, addChildSection;
     private EditText addChildEmailEditText;
     private Button addChildButton, logoutButton;
     private BottomNavigationView parentNav;
@@ -46,28 +46,9 @@ public class MyAccountActivity extends AppCompatActivity {
         addChildEmailEditText = findViewById(R.id.addChildEmailEditText);
         addChildButton = findViewById(R.id.addChildButton);
         logoutButton = findViewById(R.id.logoutButton);
+        addChildSection = findViewById(R.id.addChildSection);
 
         parentNav = findViewById(R.id.bottomNavigationView);
-        parentNav.setSelectedItemId(R.id.nav_account);
-
-        parentNav.setOnItemSelectedListener(item -> {
-            int itemId = item.getItemId();
-            if (itemId == R.id.nav_products) {
-                startActivity(new Intent(MyAccountActivity.this, ProductListActivity.class));
-                return true;
-            } else if (itemId == R.id.nav_cart) {
-                startActivity(new Intent(MyAccountActivity.this, CartActivity.class));
-                return true;
-            }
-            else if (itemId == R.id.nav_orders) {
-                // Navigate to orders
-                return true;
-            } else if (itemId == R.id.nav_account) {
-                // Navigate to account
-                return true;
-            }
-            return false;
-        });
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -88,6 +69,49 @@ public class MyAccountActivity extends AppCompatActivity {
         }
     }
 
+    private void setupBottomNavigationView(String role) {
+        parentNav.getMenu().clear();
+
+        // Set menu based on role
+        if ("Rodzic".equals(role)) {
+            parentNav.inflateMenu(R.menu.parent_menu);
+        } else if ("Dziecko".equals(role)) {
+            parentNav.inflateMenu(R.menu.child_menu);
+        } else if ("Owner".equals(role)) {
+            parentNav.inflateMenu(R.menu.owner_menu);
+        }
+
+        // Handle navigation clicks
+        parentNav.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.nav_products) {
+                startActivity(new Intent(MyAccountActivity.this, ProductListActivity.class));
+                return true;
+            } else if (itemId == R.id.nav_cart) {
+                startActivity(new Intent(MyAccountActivity.this, CartActivity.class));
+                return true;
+            }
+            else if (itemId == R.id.nav_orders) {
+                startActivity(new Intent(MyAccountActivity.this, MyOrdersActivity.class));
+                return true;
+            } else if (itemId == R.id.nav_account) {
+                return true;
+            } else if (itemId == R.id.nav_conf) {
+                 startActivity(new Intent(MyAccountActivity.this, ConfirmActivity.class));
+                return true;
+            } else if (itemId == R.id.nav_check) {
+                 startActivity(new Intent(MyAccountActivity.this, PickUpActivity.class));
+                return true;
+            } else if (itemId == R.id.nav_stats) {
+                 startActivity(new Intent(MyAccountActivity.this, StatsActivity.class));
+                return true;
+            }
+            return false;
+        });
+
+        parentNav.setSelectedItemId(R.id.nav_account);
+    }
+
     private void loadUserRoleAndChildren(String userId) {
         db.collection("users").document(userId)
                 .get()
@@ -95,12 +119,15 @@ public class MyAccountActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         String userRole = task.getResult().getString("role");
 
+                        setupBottomNavigationView(userRole);
+
                         if ("Rodzic".equals(userRole)) {
                             childrenTitleText.setText("Dzieci: ");
                             loadChildrenList(userId);
                         } else {
                             childrenTitleText.setVisibility(TextView.GONE);
                             childrenListLayout.setVisibility(LinearLayout.GONE);
+                            addChildSection.setVisibility(LinearLayout.GONE);
                         }
                     } else {
                         Toast.makeText(MyAccountActivity.this, "Failed to get user role", Toast.LENGTH_SHORT).show();

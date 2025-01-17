@@ -35,5 +35,13 @@
     <string name="account_icon_kid">Konto dziecka</string>
     <string name="account_icon">Twoje konto</string>
     <string name="plus">+</string>
+    <string name="minus">Zmniejsz wartość</string>
+    <string name="plus_cart">Zwiększ ilość</string>
+    <string name="minus_cart">Zmniejsz ilość</string>
+    <string name="delete_cart">Usuń produkt</string>
+    <string name="my_orders_title">Moje zamówienia</string>
+    <string name="confirm_title">Zatwierdzanie zamówień</string>
+    <string name="pickup_title">Odbieranie zamówień</string>
+    <string name="stats_title">Statystyki</string>
 
 </resources>
