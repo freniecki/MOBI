@@ -64,6 +64,7 @@ public class MyOrdersActivity extends AppCompatActivity {
         // Set menu based on role
         if ("Rodzic".equals(role)) {
             parentNav.inflateMenu(R.menu.parent_menu);
+
         } else if ("Dziecko".equals(role)) {
             parentNav.inflateMenu(R.menu.child_menu);
         } else if ("Owner".equals(role)) {

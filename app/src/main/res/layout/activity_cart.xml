@@ -137,7 +137,7 @@
             android:id="@+id/checkoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Przejdź do kasy"
+            android:text="@string/order"
             android:textColor="@android:color/black"
             android:backgroundTint="@color/green"
             app:cornerRadius="16dp"

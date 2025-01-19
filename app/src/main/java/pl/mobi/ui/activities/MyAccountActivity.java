@@ -221,10 +221,10 @@ public class MyAccountActivity extends AppCompatActivity {
                                         Toast.makeText(MyAccountActivity.this, "Failed to add child: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                     });
                         } else {
-                            Toast.makeText(MyAccountActivity.this, "The user is not a child", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MyAccountActivity.this, "Ten użytkownik nie jest dzieckiem", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(MyAccountActivity.this, "Child not found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MyAccountActivity.this, "Nie znaleziono dziecka", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

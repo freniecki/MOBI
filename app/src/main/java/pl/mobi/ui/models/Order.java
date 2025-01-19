@@ -1,18 +1,22 @@
 package pl.mobi.ui.models;
 
+import com.google.firebase.Timestamp;
+
 import java.util.List;
 
 public class Order {
+
+    private String orderId;
     private String parentId;
     private String childId;
     private String status;
-    private String pickupDate;
+    private Timestamp pickupDate;
     private List<CartItem> items;
 
     public Order() {
     }
 
-    public Order(String parentId, String childId, String pickupDate, List<CartItem> items, String status) {
+    public Order(String parentId, String childId, Timestamp pickupDate, List<CartItem> items, String status) {
         this.parentId = parentId;
         this.childId = childId;
         this.pickupDate = pickupDate;
@@ -21,6 +25,15 @@ public class Order {
     }
 
     // Gettery i settery
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
     public String getParentId() {
         return parentId;
     }
@@ -37,11 +50,11 @@ public class Order {
         this.childId = childId;
     }
 
-    public String getPickupDate() {
+    public Timestamp getPickupDate() {
         return pickupDate;
     }
 
-    public void setPickupDate(String pickupDate) {
+    public void setPickupDate(Timestamp pickupDate) {
         this.pickupDate = pickupDate;
     }
 

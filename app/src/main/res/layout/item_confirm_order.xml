@@ -16,26 +16,12 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/childName"
+        android:id="@+id/child"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dziecko: "
+        android:text="Odbiorca: "
         android:textStyle="bold"
         android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/parentName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rodzic: "
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/statusText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Status: "
-        android:textSize="14sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProducts"
@@ -43,4 +29,29 @@
         android:layout_height="wrap_content"
         android:nestedScrollingEnabled="false"
         android:paddingTop="8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:paddingTop="8dp">
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="Anuluj"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/readyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gotowe do odbioru"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 </LinearLayout>

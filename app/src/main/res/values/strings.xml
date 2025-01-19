@@ -43,5 +43,6 @@
     <string name="confirm_title">Zatwierdzanie zamówień</string>
     <string name="pickup_title">Odbieranie zamówień</string>
     <string name="stats_title">Statystyki</string>
+    <string name="order">Złóż zamówienie</string>
 
 </resources>
