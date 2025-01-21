@@ -37,11 +37,12 @@
                 android:id="@+id/minusButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/minus"
+                android:src="@drawable/round_delete_24"
                 android:scaleType="fitCenter"
-                android:background="@color/white"
+                android:background="?android:colorBackground"
                 android:padding="4dp"
-                android:contentDescription="@string/minus_cart" />
+                android:contentDescription="@string/minus_cart"
+                app:tint="?attr/colorOnBackground"/>
 
             <TextView
                 android:id="@+id/quantityText"
@@ -55,11 +56,12 @@
                 android:id="@+id/plusButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/plus"
+                android:src="@drawable/round_add_24"
                 android:scaleType="fitCenter"
-                android:background="@color/white"
+                android:background="?android:colorBackground"
                 android:padding="4dp"
-                android:contentDescription="@string/plus_cart" />
+                android:contentDescription="@string/plus_cart"
+                app:tint="?attr/colorOnBackground" />
         </LinearLayout>
     </LinearLayout>
 
@@ -69,10 +71,11 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:contentDescription="@string/delete_cart"
-        android:src="@drawable/bin"
+        android:src="@drawable/baseline_delete_outline_24"
         android:scaleType="fitCenter"
         android:layout_gravity="end"
-        android:background="@color/white"
+        android:background="?android:colorBackground"
         android:padding="4dp"
-        android:layout_marginStart="16dp" />
+        android:layout_marginStart="16dp"
+        app:tint="?attr/colorOnBackground" />
 </LinearLayout>
