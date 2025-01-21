@@ -1,6 +1,7 @@
 package pl.mobi.ui.activities;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -11,8 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -31,6 +34,8 @@ public class MyAccountActivity extends AppCompatActivity {
     private EditText addChildEmailEditText;
     private Button addChildButton, logoutButton;
     private BottomNavigationView parentNav;
+
+    private SwitchMaterial themeSwitch;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -67,6 +72,21 @@ public class MyAccountActivity extends AppCompatActivity {
             startActivity(new Intent(MyAccountActivity.this, LoginActivity.class));
             finish();
         }
+
+        // change view mode light/dark
+        themeSwitch = findViewById(R.id.themeSwitch);
+
+        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        themeSwitch.setChecked(currentNightMode == Configuration.UI_MODE_NIGHT_YES);
+
+        themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+            recreate();
+        });
     }
 
     private void setupBottomNavigationView(String role) {

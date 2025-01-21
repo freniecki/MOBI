@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:text="@string/nazwa_produktu"
             android:textSize="16sp"
-            android:textColor="@android:color/black" />
+            android:textColor="?android:textColorPrimary" />
 
         <!-- Product Price -->
         <TextView
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:text="@string/cena_0_00_z"
             android:textSize="14sp"
-            android:textColor="@android:color/black" />
+            android:textColor="?android:textColorSecondary" />
 
         <!-- Add to Cart Button -->
         <com.google.android.material.button.MaterialButton
