@@ -13,12 +13,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 import pl.mobi.R;
+import pl.mobi.ui.utils.SessionManager;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText emailEditText, passwordEditText;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,12 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        sessionManager = new SessionManager(this);
+
+        if (sessionManager.isLoggedIn()) {
+            String userRole = sessionManager.getUserRole();
+            navigateToRoleBasedActivity(userRole);
+        }
 
         loginButton.setOnClickListener(v -> loginUser());
     }
@@ -40,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = passwordEditText.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            emailEditText.setError("Adres E-mail jest wymagant");
+            emailEditText.setError("Adres E-mail jest wymagany");
             return;
         }
         if (TextUtils.isEmpty(password)) {
@@ -51,25 +61,19 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        String userId = mAuth.getCurrentUser().getUid();
+                        String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+
+                        sessionManager.setLoggedIn(true);
 
                         db.collection("users").document(userId)
                                 .get()
                                 .addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
                                         String userRole = task1.getResult().getString("role");
-
+                                        
                                         if (userRole != null) {
-                                            if (userRole.equals("Rodzic")) {
-                                                Intent paerntIntent = new Intent(LoginActivity.this, ProductListActivity.class);
-                                                startActivity(paerntIntent);
-                                            } else if (userRole.equals("Dziecko")) {
-                                                Intent childIntent = new Intent(LoginActivity.this, MyOrdersActivity.class);
-                                                startActivity(childIntent);
-                                            } else if (userRole.equals("Owner")) {
-                                                Intent ownerIntent = new Intent(LoginActivity.this, PickUpActivity.class);
-                                                startActivity(ownerIntent);
-                                            }
+                                            sessionManager.setUserRole(userRole);
+                                            navigateToRoleBasedActivity(userRole);
                                         } else {
                                             Toast.makeText(LoginActivity.this, "Rola użytkownika nie została przypisana.", Toast.LENGTH_SHORT).show();
                                         }
@@ -82,5 +86,22 @@ public class LoginActivity extends AppCompatActivity {
                                 + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void navigateToRoleBasedActivity(String userRole) {
+        switch (userRole) {
+            case "Rodzic":
+                Intent paerntIntent = new Intent(LoginActivity.this, ProductListActivity.class);
+                startActivity(paerntIntent);
+                break;
+            case "Dziecko":
+                Intent childIntent = new Intent(LoginActivity.this, MyOrdersActivity.class);
+                startActivity(childIntent);
+                break;
+            case "Owner":
+                Intent ownerIntent = new Intent(LoginActivity.this, PickUpActivity.class);
+                startActivity(ownerIntent);
+                break;
+        }
     }
 }
