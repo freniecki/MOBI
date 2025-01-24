@@ -26,6 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.List;
 
 import pl.mobi.R;
+import pl.mobi.ui.utils.SessionManager;
 
 public class MyAccountActivity extends AppCompatActivity {
 
@@ -39,6 +40,7 @@ public class MyAccountActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,8 @@ public class MyAccountActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+        sessionManager = new SessionManager(this);
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
@@ -251,6 +255,7 @@ public class MyAccountActivity extends AppCompatActivity {
 
     private void logoutUser() {
         mAuth.signOut();
+        sessionManager.clearSession();
         Toast.makeText(MyAccountActivity.this, "Wylogowano cię", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(MyAccountActivity.this, MainActivity.class));
         finish();
