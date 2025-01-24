@@ -150,7 +150,9 @@ public class MyOrdersActivity extends AppCompatActivity {
                 orderList.clear();
                 for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                     Order order = document.toObject(Order.class);
+                    order.setOrderId(document.getId());
                     orderList.add(order);
+                    Log.i("dupa", "orderid: " + order.getOrderId());
                 }
                 orderAdapter.notifyDataSetChanged();
             }
