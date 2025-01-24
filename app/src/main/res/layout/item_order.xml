@@ -37,10 +37,18 @@
         android:text="Status: "
         android:textSize="14sp" />
 
+    <ImageView
+        android:id="@+id/qrCodeImageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:contentDescription="Kod QR" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProducts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:nestedScrollingEnabled="false"
         android:paddingTop="8dp" />
+
 </LinearLayout>
