@@ -4,6 +4,11 @@ import com.google.firebase.Timestamp;
 
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class Order {
 
     private String orderId;
@@ -21,56 +26,6 @@ public class Order {
         this.childId = childId;
         this.pickupDate = pickupDate;
         this.items = items;
-        this.status = status;
-    }
-
-    // Gettery i settery
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
-    }
-
-    public String getChildId() {
-        return childId;
-    }
-
-    public void setChildId(String childId) {
-        this.childId = childId;
-    }
-
-    public Timestamp getPickupDate() {
-        return pickupDate;
-    }
-
-    public void setPickupDate(Timestamp pickupDate) {
-        this.pickupDate = pickupDate;
-    }
-
-    public List<CartItem> getItems() {
-        return items;
-    }
-
-    public void setItems(List<CartItem> items) {
-        this.items = items;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
         this.status = status;
     }
 }

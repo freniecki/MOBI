@@ -63,8 +63,6 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
 
-                        sessionManager.setLoggedIn(true);
-
                         db.collection("users").document(userId)
                                 .get()
                                 .addOnCompleteListener(task1 -> {
@@ -72,7 +70,8 @@ public class LoginActivity extends AppCompatActivity {
                                         String userRole = task1.getResult().getString("role");
                                         
                                         if (userRole != null) {
-                                            sessionManager.setUserRole(userRole);
+                                            sessionManager.createSession(userRole);
+                                            Toast.makeText(LoginActivity.this, "Otwieram sesję", Toast.LENGTH_SHORT).show();
                                             navigateToRoleBasedActivity(userRole);
                                         } else {
                                             Toast.makeText(LoginActivity.this, "Rola użytkownika nie została przypisana.", Toast.LENGTH_SHORT).show();
