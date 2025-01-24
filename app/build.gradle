@@ -52,4 +52,9 @@ dependencies {
     implementation libs.glide
     annotationProcessor libs.compiler
     implementation libs.material.v1120
+
+    // qr
+    implementation libs.zxing.core
+    implementation libs.zxing.embedded
+
 }
