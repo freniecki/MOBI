@@ -254,8 +254,8 @@ public class MyAccountActivity extends AppCompatActivity {
     }
 
     private void logoutUser() {
-        mAuth.signOut();
         sessionManager.clearSession();
+        mAuth.signOut();
         Toast.makeText(MyAccountActivity.this, "Wylogowano cię", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(MyAccountActivity.this, MainActivity.class));
         finish();
