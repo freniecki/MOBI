@@ -8,9 +8,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import pl.mobi.R;
 import pl.mobi.ui.activities.PickUpActivity;
@@ -19,8 +25,10 @@ import pl.mobi.ui.models.Order;
 public class PickupAdapter extends RecyclerView.Adapter<PickupAdapter.ViewHolder> {
     private Context context;
     private List<Order> orderList;
+    private FirebaseFirestore db;
 
     public PickupAdapter(Context context, List<Order> orderList) {
+        db = FirebaseFirestore.getInstance();
         this.context = context;
         this.orderList = orderList;
     }
@@ -35,8 +43,28 @@ public class PickupAdapter extends RecyclerView.Adapter<PickupAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Order order = orderList.get(position);
-//        holder.childName.setText(order.getChild());
-        holder.pickupDate.setText(order.getPickupDate().toDate().toString());
+
+        if (order.getPickupDate() != null) {
+            Date date = order.getPickupDate().toDate(); // Convert Timestamp to Date
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()); // Set desired format
+            String formattedDate = sdf.format(date); // Format the Date
+            holder.pickupDate.setText("Data odbioru: " + formattedDate); // Display formatted date
+        }
+
+        db.collection("users")
+                .document(order.getChildId())
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        holder.child.setText("Dziecko: " + documentSnapshot.getString("email"));
+                    } else {
+                        holder.child.setText("Dziecko: nie-znaleziono emaila na bazie id");
+                    }
+                });
+
+        OrderProductAdapter productAdapter = new OrderProductAdapter(context, order.getItems());
+        holder.recyclerViewProducts.setLayoutManager(new LinearLayoutManager(context));
+        holder.recyclerViewProducts.setAdapter(productAdapter);
 
         holder.readyButton.setOnClickListener(v -> {
             if (context instanceof PickUpActivity) {
@@ -51,14 +79,16 @@ public class PickupAdapter extends RecyclerView.Adapter<PickupAdapter.ViewHolder
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView childName, pickupDate;
+        TextView child, pickupDate;
         Button readyButton;
+        RecyclerView recyclerViewProducts;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            childName = itemView.findViewById(R.id.childName);
+            child = itemView.findViewById(R.id.child);
             pickupDate = itemView.findViewById(R.id.pickupDate);
             readyButton = itemView.findViewById(R.id.readyButton);
+            recyclerViewProducts = itemView.findViewById(R.id.recyclerViewProducts);
         }
     }
 }

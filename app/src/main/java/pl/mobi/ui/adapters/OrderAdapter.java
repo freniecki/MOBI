@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import pl.mobi.R;
 import pl.mobi.ui.models.Order;
@@ -84,8 +85,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
             holder.pickupDate.setText("Data odbioru: " + formattedDate); // Display formatted date
         }
         String orderId = order.getOrderId();
-        Bitmap qrCodeBitmap = generateQRCode(orderId);
-        holder.qrCodeImageView.setImageBitmap(qrCodeBitmap);
+        if ( Objects.equals(order.getStatus(), "Gotowe do odbioru")) {
+            Bitmap qrCodeBitmap = generateQRCode(orderId);
+            holder.qrCodeImageView.setImageBitmap(qrCodeBitmap);
+        } else {
+            holder.qrCodeImageView.setVisibility(View.GONE);
+        }
     }
 
     public Bitmap generateQRCode(String orderId) {
