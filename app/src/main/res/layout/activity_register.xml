@@ -36,7 +36,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Email EditText -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_input"
         android:layout_width="320dp"
@@ -59,7 +58,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Password EditText -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_input"
         android:layout_width="320dp"
@@ -82,8 +80,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Spinner -->
-
     <Spinner
         android:id="@+id/roleSpinner"
         android:layout_width="320dp"
@@ -97,8 +93,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/password_input"
         android:contentDescription="@string/role_spinner_description"/>
-
-    <!-- Register Button -->
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginButton"

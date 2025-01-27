@@ -113,7 +113,6 @@
 
     </LinearLayout>
 
-    <!-- Total Price and Checkout Button -->
     <LinearLayout
         android:id="@+id/totalLayout"
         android:layout_width="match_parent"

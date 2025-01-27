@@ -62,7 +62,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                // Load the image using Glide after retrieving the download URL
                 Glide.with(holder.productImageView.getContext())
                         .load(uri.toString())
                         .into(holder.productImageView);
@@ -70,9 +69,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                // Handle failure (e.g., show a placeholder image or handle error)
                 Glide.with(holder.productImageView.getContext())
-                        .load(R.drawable.no_image) // Assuming you have a placeholder image
+                        .load(R.drawable.no_image)
                         .into(holder.productImageView);
             }
         });

@@ -82,7 +82,7 @@ public class ConfirmActivity extends AppCompatActivity {
                         orderList.clear();
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                             Order order = document.toObject(Order.class);
-                            order.setOrderId(document.getId()); // Store the document ID
+                            order.setOrderId(document.getId());
                             orderList.add(order);
                         }
                         confirmOrderAdapter.notifyDataSetChanged();

@@ -50,7 +50,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.productPrice.setText(String.format("%.2f zł", item.getProductPrice()));
         holder.quantityText.setText(String.valueOf(item.getQuantity()));
 
-        // Increase quantity
         holder.plusButton.setOnClickListener(v -> {
             int quantity = item.getQuantity() + 1;
             item.setQuantity(quantity);
@@ -59,7 +58,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             updateTotalPrice();
         });
 
-        // Decrease quantity
         holder.minusButton.setOnClickListener(v -> {
             int quantity = item.getQuantity();
             if (quantity > 1) {
@@ -71,7 +69,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             }
         });
 
-        // Delete item from cart
         holder.binButton.setOnClickListener(v -> {
             cartItems.remove(position);
             notifyItemRemoved(position);

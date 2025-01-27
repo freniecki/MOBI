@@ -40,10 +40,7 @@ public class StatsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stats);
 
-        // Initialize Firebase
         db = FirebaseFirestore.getInstance();
-
-        // Initialize UI components
         parentNav = findViewById(R.id.bottomNavigationView);
         parentNav.setSelectedItemId(R.id.nav_stats);
         startDateButton = findViewById(R.id.startDateButton);
@@ -56,18 +53,14 @@ public class StatsActivity extends AppCompatActivity {
         adapter = new StatsAdapter(new ArrayList<>());
         productsRecyclerView.setAdapter(adapter);
 
-        // Load default statistics
         filterStatistics("quantity");
 
-        // Date pickers
         startDateButton.setOnClickListener(v -> showDatePickerDialog(true));
         endDateButton.setOnClickListener(v -> showDatePickerDialog(false));
 
-        // Filters
         filterByQuantityButton.setOnClickListener(v -> filterStatistics("quantity"));
         filterByProfitButton.setOnClickListener(v -> filterStatistics("profit"));
 
-        // Bottom Navigation
         parentNav.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_conf) {

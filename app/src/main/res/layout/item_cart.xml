@@ -28,7 +28,6 @@
             android:textColor="?android:textColorSecondary"
             android:textSize="14sp" />
 
-        <!-- Quantity control buttons -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,7 +67,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Larger Delete item button -->
     <ImageButton
         android:id="@+id/binButton"
         android:layout_width="64dp"

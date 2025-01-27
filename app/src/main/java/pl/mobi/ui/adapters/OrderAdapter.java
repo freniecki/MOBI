@@ -73,16 +73,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
         holder.status.setText("Status: " + order.getStatus());
 
-        // Set up nested RecyclerView for products
         OrderProductAdapter productAdapter = new OrderProductAdapter(context, order.getItems());
         holder.recyclerViewProducts.setLayoutManager(new LinearLayoutManager(context));
         holder.recyclerViewProducts.setAdapter(productAdapter);
 
         if (order.getPickupDate() != null) {
-            Date date = order.getPickupDate().toDate(); // Convert Timestamp to Date
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()); // Set desired format
-            String formattedDate = sdf.format(date); // Format the Date
-            holder.pickupDate.setText("Data odbioru: " + formattedDate); // Display formatted date
+            Date date = order.getPickupDate().toDate();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+            String formattedDate = sdf.format(date);
+            holder.pickupDate.setText("Data odbioru: " + formattedDate);
         }
         String orderId = order.getOrderId();
         if ( Objects.equals(order.getStatus(), "Gotowe do odbioru")) {

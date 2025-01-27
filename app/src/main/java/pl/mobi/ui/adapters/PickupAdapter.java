@@ -45,10 +45,10 @@ public class PickupAdapter extends RecyclerView.Adapter<PickupAdapter.ViewHolder
         Order order = orderList.get(position);
 
         if (order.getPickupDate() != null) {
-            Date date = order.getPickupDate().toDate(); // Convert Timestamp to Date
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()); // Set desired format
-            String formattedDate = sdf.format(date); // Format the Date
-            holder.pickupDate.setText("Data odbioru: " + formattedDate); // Display formatted date
+            Date date = order.getPickupDate().toDate();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+            String formattedDate = sdf.format(date);
+            holder.pickupDate.setText("Data odbioru: " + formattedDate);
         }
 
         db.collection("users")

@@ -40,7 +40,6 @@
 
     </LinearLayout>
 
-    <!-- Email Display Section with Icon -->
     <LinearLayout
         android:id="@+id/emailSection"
         android:layout_width="match_parent"
@@ -52,7 +51,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Account Icon -->
         <ImageView
             android:id="@+id/accountIcon"
             android:layout_width="48dp"
@@ -63,7 +61,6 @@
             android:layout_marginEnd="8dp"
             app:tint="?attr/colorOnBackground"/>
 
-        <!-- Email Text - Made Bigger -->
         <TextView
             android:id="@+id/emailTextView"
             android:layout_width="wrap_content"
@@ -74,7 +71,6 @@
             android:textStyle="bold"/>
     </LinearLayout>
 
-    <!-- Children List Section -->
     <LinearLayout
         android:id="@+id/childrenSection"
         android:layout_width="match_parent"
@@ -94,7 +90,6 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <!-- Children List Layout -->
         <LinearLayout
             android:id="@+id/childrenListLayout"
             android:layout_width="match_parent"
@@ -145,7 +140,6 @@
             app:cornerRadius="16dp" />
     </LinearLayout>
 
-    <!-- Logout Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/logoutButton"
         android:layout_width="320dp"

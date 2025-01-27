@@ -39,7 +39,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Email EditText -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_input"
         android:layout_width="320dp"
@@ -62,7 +61,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Password EditText -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_input"
         android:layout_width="320dp"
@@ -86,7 +84,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Login Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginButton"
         android:layout_width="320dp"

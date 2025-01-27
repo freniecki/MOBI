@@ -5,7 +5,6 @@
     android:gravity="center_vertical"
     android:padding="8dp">
 
-    <!-- Account Icon for each child email -->
     <ImageView
         android:id="@+id/childAccountIcon"
         android:layout_width="24dp"
@@ -14,7 +13,6 @@
         android:contentDescription="@string/account_icon_kid"
         android:layout_marginEnd="8dp"/>
 
-    <!-- Child Email -->
     <TextView
         android:id="@+id/childEmailTextView"
         android:layout_width="wrap_content"
@@ -23,7 +21,6 @@
         android:textColor="?android:textColorSecondary"
         android:textSize="18sp" />
 
-    <!-- Bin Icon Instead of Delete Button -->
     <ImageView
         android:id="@+id/childDeleteIcon"
         android:layout_width="24dp"

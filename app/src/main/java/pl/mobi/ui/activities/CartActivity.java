@@ -126,11 +126,9 @@ public class CartActivity extends AppCompatActivity {
                                                 DocumentSnapshot childDocument = childTask.getResult();
                                                 String childEmail = childDocument.getString("email");
                                                 if (childEmail != null) {
-                                                    // Add the child object to the list
                                                     childrenList.add(new Child(childDocument.getId(), childEmail));
                                                 }
                                             }
-                                            // Create a custom adapter for the Spinner
                                             ArrayAdapter<Child> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, childrenList);
                                             childSpinner.setAdapter(adapter);
                                         });
@@ -147,21 +145,16 @@ public class CartActivity extends AppCompatActivity {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, selectedYear, selectedMonth, selectedDay) -> {
-            // Create a Calendar object for the selected date
             Calendar selectedDate = Calendar.getInstance();
             selectedDate.set(selectedYear, selectedMonth, selectedDay);
 
-            // Compare selected date with the current date
             Calendar currentDate = Calendar.getInstance();
             if (selectedDate.before(currentDate)) {
-                // Show a toast message if the selected date is before today
                 Toast.makeText(CartActivity.this, "Wybierz datę nie wcześniejszą niż dzisiaj!", Toast.LENGTH_SHORT).show();
             } else {
-                // If the selected date is valid, set the pickup date text
                 String date = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
                 pickupDateTextView.setText(date);
 
-                // Convert the selected date to a Timestamp
                 selectedPickupDateTimestamp = new Timestamp(selectedDate.getTime());
             }
         }, year, month, day);
@@ -170,21 +163,17 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void confirmOrder() {
-        // Check if the cart is empty
         List<CartItem> cartItems = CartManager.getInstance().getCartItems();
         if (cartItems.isEmpty()) {
-            // Show a toast message if the cart is empty
             Toast.makeText(this, "Koszyk jest pusty. Dodaj produkty do koszyka!", Toast.LENGTH_SHORT).show();
-            return; // Exit the method if the cart is empty
+            return;
         }
 
-        // Check if the pickup date is selected
         if (selectedPickupDateTimestamp == null) {
             Toast.makeText(this, "Wybierz datę odbioru!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Get the selected child from the spinner
         String parentId = mAuth.getCurrentUser().getUid();
         Child selectedChild = (Child) childSpinner.getSelectedItem();
         if (selectedChild == null) {
@@ -193,26 +182,22 @@ public class CartActivity extends AppCompatActivity {
         }
         String childId = selectedChild.getId();
 
-        // Create the order map
         Map<String, Object> order = new HashMap<>();
         order.put("childId", childId);
         order.put("parentId", parentId);
-        order.put("pickupDate", selectedPickupDateTimestamp);  // Use the selected Timestamp
+        order.put("pickupDate", selectedPickupDateTimestamp);
         order.put("status", "Złożone");
-        order.put("items", cartItems);  // Pass the cart items
+        order.put("items", cartItems);
 
-        // Store the order in Firestore
         FirebaseFirestore.getInstance().collection("orders")
                 .add(order)
                 .addOnSuccessListener(documentReference -> {
-                    // Show success message and navigate to orders screen
                     Toast.makeText(this, "Zamówienie zostało złożone!", Toast.LENGTH_SHORT).show();
-                    CartManager.getInstance().clearCart();  // Clear the cart
+                    CartManager.getInstance().clearCart();
                     Intent intent = new Intent(CartActivity.this, MyOrdersActivity.class);
                     startActivity(intent);
                 })
                 .addOnFailureListener(e -> {
-                    // Show error message if the order could not be placed
                     Toast.makeText(this, "Błąd przy składaniu zamówienia: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
     }

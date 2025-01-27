@@ -39,7 +39,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- RecyclerView with Style -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProducts"
         android:layout_width="0dp"

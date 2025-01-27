@@ -38,7 +38,6 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Date Range Selection -->
     <LinearLayout
         android:id="@+id/filters"
         android:layout_width="match_parent"

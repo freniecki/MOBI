@@ -64,7 +64,6 @@ public class MyAccountActivity extends AppCompatActivity {
         if (currentUser != null) {
             emailTextView.setText(currentUser.getEmail());
 
-            // Check user's role and load children if "Rodzic"
             loadUserRoleAndChildren(currentUser.getUid());
 
             logoutButton.setOnClickListener(v -> logoutUser());
@@ -75,7 +74,6 @@ public class MyAccountActivity extends AppCompatActivity {
             finish();
         }
 
-        // change view mode light/dark
         themeButton = findViewById(R.id.themeButton);
 
         themeButton.setOnClickListener(click -> {
@@ -93,7 +91,6 @@ public class MyAccountActivity extends AppCompatActivity {
     private void setupBottomNavigationView(String role) {
         parentNav.getMenu().clear();
 
-        // Set menu based on role
         if ("Rodzic".equals(role)) {
             parentNav.inflateMenu(R.menu.parent_menu);
         } else if ("Dziecko".equals(role)) {
@@ -102,7 +99,6 @@ public class MyAccountActivity extends AppCompatActivity {
             parentNav.inflateMenu(R.menu.owner_menu);
         }
 
-        // Handle navigation clicks
         parentNav.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_products) {
@@ -173,18 +169,12 @@ public class MyAccountActivity extends AppCompatActivity {
                                                 DocumentSnapshot childDocument = childTask.getResult();
                                                 String childEmail = childDocument.getString("email");
                                                 if (childEmail != null) {
-                                                    // Inflate the child item template
                                                     LinearLayout childLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.child_item, null);
-
-                                                    // Set the child's email dynamically
                                                     TextView childTextView = childLayout.findViewById(R.id.childEmailTextView);
                                                     childTextView.setText(childEmail);
-
-                                                    // Set the click listener for the delete icon
                                                     ImageView deleteIcon = childLayout.findViewById(R.id.childDeleteIcon);
                                                     deleteIcon.setOnClickListener(v -> deleteChildFromParent(parentId, childId));
 
-                                                    // Add the child layout to the children list
                                                     childrenListLayout.addView(childLayout);
                                                 }
 
@@ -201,7 +191,6 @@ public class MyAccountActivity extends AppCompatActivity {
         parentRef.update("children", FieldValue.arrayRemove(childId))
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(MyAccountActivity.this, "Dziecko zostało usunięte", Toast.LENGTH_SHORT).show();
-                    // Refresh the children list after deletion
                     childrenListLayout.removeAllViews();
                     loadChildrenList(parentId);
                 })
