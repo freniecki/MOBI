@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -33,10 +33,8 @@ public class MyAccountActivity extends AppCompatActivity {
     private TextView emailTextView, childrenTitleText;
     private LinearLayout childrenListLayout, addChildSection;
     private EditText addChildEmailEditText;
-    private Button addChildButton, logoutButton;
+    private Button addChildButton, logoutButton, themeButton;
     private BottomNavigationView parentNav;
-
-    private SwitchMaterial themeSwitch;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -78,16 +76,15 @@ public class MyAccountActivity extends AppCompatActivity {
         }
 
         // change view mode light/dark
-        themeSwitch = findViewById(R.id.themeSwitch);
+        themeButton = findViewById(R.id.themeButton);
 
-        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-        themeSwitch.setChecked(currentNightMode == Configuration.UI_MODE_NIGHT_YES);
+        themeButton.setOnClickListener(click -> {
+            int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
 
-        themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            } else {
+            if (currentNightMode == Configuration.UI_MODE_NIGHT_YES) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             }
             recreate();
         });
