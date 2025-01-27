@@ -152,7 +152,6 @@ public class MyOrdersActivity extends AppCompatActivity {
                     Order order = document.toObject(Order.class);
                     order.setOrderId(document.getId());
                     orderList.add(order);
-                    Log.i("dupa", "orderid: " + order.getOrderId());
                 }
                 orderAdapter.notifyDataSetChanged();
             }
