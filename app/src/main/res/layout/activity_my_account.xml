@@ -176,6 +176,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- switch screen theme  -->
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/themeSwitch"
         android:layout_width="wrap_content"
