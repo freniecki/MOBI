@@ -13,6 +13,7 @@
         android:layout_weight="1"
         android:text="Produkt"
         android:textSize="16sp"
+        android:textColor="?android:textColorSecondary"
         android:textStyle="bold" />
 
     <TextView
@@ -20,6 +21,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textColor="?android:textColorSecondary"
         android:text="Ilość"
         android:gravity="center"
         android:textSize="16sp" />
@@ -28,6 +30,7 @@
         android:id="@+id/productTotalPrice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textColor="?android:textColorSecondary"
         android:layout_weight="1"
         android:text="Cena"
         android:gravity="end"
