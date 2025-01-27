@@ -11,7 +11,7 @@
     <string name="register_button">Zarejestruj się</string>
     <string name="login_button">Zaloguj się</string>
 
-    <string name="theme_switch">Dark Mode</string>
+    <string name="theme_switch">Switch Theme</string>
 
     <string name="login_hint">Nazwa użytkownika</string>
     <string name="email_hint">Adres E-mail</string>

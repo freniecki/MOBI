@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="child@example.com"
-        android:textColor="@android:color/black"
+        android:textColor="?android:textColorSecondary"
         android:textSize="18sp" />
 
     <!-- Bin Icon Instead of Delete Button -->
