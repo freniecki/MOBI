@@ -3,7 +3,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:padding="8dp">
+    android:padding="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- Account Icon for each child email -->
     <ImageView
@@ -11,8 +12,10 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:src="@drawable/account"
+        android:background="?android:colorBackground"
         android:contentDescription="@string/account_icon_kid"
-        android:layout_marginEnd="8dp"/>
+        android:layout_marginEnd="8dp"
+        app:tint="?attr/colorOnBackground"/>
 
     <!-- Child Email -->
     <TextView
@@ -28,7 +31,9 @@
         android:id="@+id/childDeleteIcon"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:src="@drawable/bin"
+        android:src="@drawable/outline_delete_outline_24"
+        android:background="?android:colorBackground"
         android:contentDescription="@string/bin_icon_kid"
-        android:layout_marginStart="16dp"/>
+        android:layout_marginStart="16dp"
+        app:tint="?attr/colorOnBackground"/>
 </LinearLayout>
